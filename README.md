@@ -1,4 +1,14 @@
 # Guided Practice Readme
 
-Please look at your Canvas Guided Practice for instructions,
-and, if available, your cohort playlist.
+## DEV MODE
+
+go to root:
+`npm i`
+
+go to `client` directory in a separate terminal:
+`npm i`
+
+in root:
+`npm run start`
+in `client`:
+`npm run dev`
