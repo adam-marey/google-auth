@@ -1,29 +1,16 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const pg = require('pg');
+const { router, client } = require('./routes');
 
-const client = new pg.Client(
-  process.env.DATABASE_URL || 'postgres://localhost/arizona'
-);
-
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
-app.get('/api/notes', async (req, res, next) => {
-  try {
-    const SQL = `
-      SELECT * from notes;
-    `;
-    const response = await client.query(SQL);
-    res.send(response.rows);
-  } catch (ex) {
-    next(ex);
-  }
-});
+app.use('/api', router);
 
 const init = async () => {
   await client.connect();
