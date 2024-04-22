@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pg = require('pg');
 
-const client = new pg.Client(
-  process.env.DATABASE_URL || 'postgres://localhost/arizona'
-);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 router.get('/users', async (req, res, next) => {
   try {
